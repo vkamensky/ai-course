@@ -1,0 +1,63 @@
+# Локальные временные файлы генерации
+30 aimindset/website_output/
+website_output/
+
+# Но коммитим docs/ для GitHub Pages (генерируется вручную)
+!docs/
+
+# Бинарные файлы
+*.pptx
+*.zip
+*.pdf
+*.docx
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+*.egg-info/
+dist/
+build/
+
+# Системные файлы macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Системные файлы Windows
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# IDE и редакторы
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.cursor/
+
+# Временные файлы
+*.tmp
+*.log
+*.bak
+*.cache
+
+# Приватные данные (если есть)
+**/creds/
+**/*cred*.md
+**/*password*.md
+**/*token*.md
+
+# Obsidian специфичные (опционально)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/hotkeys.json
+
