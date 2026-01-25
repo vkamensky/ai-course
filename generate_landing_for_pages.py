@@ -47,6 +47,15 @@ def main():
     shutil.copy2(latest, docs_dir / "index.html")
     print(f"\n✅ {latest.name} → index.html (главная страница)")
     
+    # Копируем папку assets/ если она существует
+    assets_source = source_website / "assets"
+    if assets_source.exists() and assets_source.is_dir():
+        assets_dest = docs_dir / "assets"
+        if assets_dest.exists():
+            shutil.rmtree(assets_dest)
+        shutil.copytree(assets_source, assets_dest)
+        print(f"✅ assets/ → docs/assets/ (изображения)")
+    
     # Опционально: копируем все версии для истории
     # Раскомментируйте, если нужны все версии:
     # for file in landing_files:
