@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прокачай свою продуктивность с помощью ИИ. От хаоса к системе</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Цвета */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --text-dark: #1a202c;
+            --text-gray: #4a5568;
+            --text-light: #718096;
+            --border-color: #e2e8f0;
+            
+            /* Тени */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.2);
+            
+            /* Spacing система (8px базовая единица) */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --space-2xl: 64px;
+            --space-3xl: 80px;
+            --space-4xl: 96px;
+            
+            /* Переходы */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Контейнер */
+            --container-max-width: 1200px;
+            --container-padding: var(--space-lg);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--white);
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Навигация */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: var(--space-sm) var(--container-padding);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-acronym {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .logo-acronym .acronym {
+            font-size: 24px;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-acronym .text {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-gray);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-lg);
+            list-style: none;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: var(--space-xs);
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-weight: 500;
+            font-size: 15px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-dark);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 12px var(--space-md);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Hero секция */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-gradient);
+            color: white;
+            text-align: center;
+            padding: calc(100px + var(--space-3xl)) var(--container-padding) var(--space-3xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 8vw, 72px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: var(--space-md);
+            letter-spacing: -0.02em;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            opacity: 1;
+            letter-spacing: -0.01em;
+        }
+
+        .hero .subtitle .chaos {
+            color: #f5576c;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(245, 87, 108, 0.3);
+        }
+
+        .hero .subtitle .system {
+            color: #4facfe;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(79, 172, 254, 0.3);
+        }
+
+        .hero .tagline {
+            font-size: clamp(18px, 2.5vw, 24px);
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 0;
+            margin-top: var(--space-md);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: var(--space-sm);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: var(--space-lg);
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: var(--transition);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Секции */
+        .section {
+            padding: var(--space-3xl) var(--container-padding);
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+        }
+
+        .section-alt {
+            background: var(--light-bg);
+        }
+
+        .section-title {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--space-sm);
+            letter-spacing: -0.02em;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            font-size: clamp(20px, 2.5vw, 28px);
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--text-dark);
+        }
+
+        .section-description {
+            font-size: 20px;
+            color: var(--text-gray);
+            margin-bottom: var(--space-md);
+            max-width: 700px;
+            line-height: 1.7;
+        }
+
+        /* Карточки */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-md);
+            border: 2px solid transparent;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: #667eea;
+        }
+
+        .card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.3;
+        }
+
+        .card p {
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Списки */
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: var(--space-xl) 0 0;
+        }
+
+        .features-list li {
+            position: relative;
+            padding-left: 48px;
+            margin-bottom: var(--space-md);
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--text-gray);
+        }
+
+        .features-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 32px;
+            height: 32px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .features-list li strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* Акцентные блоки */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid #667eea;
+            border-radius: 16px;
+            padding: var(--space-lg);
+            margin-top: var(--space-xl);
+        }
+
+        .highlight-box h4 {
+            font-size: 22px;
+            color: #667eea;
+            margin-bottom: var(--space-sm);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .highlight-box p {
+            font-size: 18px;
+            color: var(--text-gray);
+            margin-bottom: var(--space-sm);
+            line-height: 1.7;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Двухколоночный layout */
+        .two-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        /* Недели */
+        .weeks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+
+        .week-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: var(--space-lg);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            border-top: 4px solid;
+            transition: var(--transition);
+        }
+
+        .week-card:nth-child(1) { border-top-color: #667eea; }
+        .week-card:nth-child(2) { border-top-color: #f5576c; }
+        .week-card:nth-child(3) { border-top-color: #4facfe; }
+        .week-card:nth-child(4) { border-top-color: #764ba2; }
+
+        .week-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .week-card h4 {
+            font-size: 24px;
+            margin-bottom: var(--space-xs);
+            color: var(--text-dark);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .week-card p {
+            font-size: 16px;
+            color: var(--text-light);
+            margin: 0 0 var(--space-sm);
+            font-weight: 500;
+        }
+
+        .week-card .result {
+            margin-top: var(--space-sm);
+            padding-top: var(--space-sm);
+            border-top: 1px solid var(--border-color);
+            font-size: 14px;
+            color: var(--text-gray);
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        /* Цены */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+
+        .price-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: var(--space-2xl);
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border: 3px solid transparent;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .price-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            padding: 3px;
+            background: var(--primary-gradient);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .price-card:hover::before {
+            opacity: 1;
+        }
+
+        .price-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .price-card h3 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            color: var(--text-dark);
+        }
+
+        .price {
+            font-size: 64px;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: var(--space-md) 0;
+            line-height: 1;
+        }
+
+        .price-period {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: var(--space-lg);
+        }
+
+        .price-card ul {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+            margin: var(--space-lg) 0 0;
+        }
+
+        .price-card ul li {
+            padding-left: var(--space-lg);
+            margin-bottom: var(--space-sm);
+            position: relative;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-gray);
+        }
+
+        .price-card ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        .price-card ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        /* Нумерованный список */
+        .numbered-list {
+            counter-reset: item;
+            list-style: none;
+            padding: 0;
+            margin: var(--space-xl) 0 0;
+        }
+
+        .numbered-list li {
+            counter-increment: item;
+            position: relative;
+            padding-left: 72px;
+            margin-bottom: var(--space-lg);
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--text-gray);
+        }
+
+        .numbered-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .numbered-list li::before {
+            content: counter(item);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 48px;
+            height: 48px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .numbered-list li strong {
+            color: var(--text-dark);
+            font-weight: 600;
+            display: block;
+            margin-bottom: var(--space-xs);
+        }
+
+        /* Кнопка наверх */
+        .scroll-top {
+            position: fixed;
+            bottom: var(--space-lg);
+            right: var(--space-lg);
+            width: 56px;
+            height: 56px;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-6px) scale(1.1);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .scroll-top.visible {
+            display: flex;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Футер */
+        .footer {
+            background: var(--dark-gradient);
+            color: white;
+            padding: var(--space-2xl) var(--container-padding);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+        }
+
+        .footer h3 {
+            font-size: 28px;
+            margin-bottom: var(--space-sm);
+            font-weight: 700;
+        }
+
+        .footer p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: var(--space-lg);
+            line-height: 1.7;
+        }
+
+        .footer p:last-child {
+            margin-bottom: 0;
+        }
+
+        .footer-cta {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .footer-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Мобильное меню */
+        .mobile-menu {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            box-shadow: var(--shadow-lg);
+            padding: var(--space-md);
+            display: none;
+            z-index: 999;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateY(0);
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-weight: 500;
+            font-size: 18px;
+            padding: var(--space-sm);
+            display: block;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu a:hover {
+            background: var(--light-bg);
+            color: var(--text-dark);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            :root {
+                --container-padding: var(--space-md);
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .section {
+                padding: var(--space-2xl) var(--container-padding);
+            }
+
+            .two-columns {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .weeks-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-sm);
+            }
+
+            .scroll-top {
+                bottom: var(--space-md);
+                right: var(--space-md);
+                width: 50px;
+                height: 50px;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .weeks-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+            }
+
+            .two-columns {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Анимации при скролле */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигация -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo logo-acronym">
+                <span class="acronym">AI</span>
+                <span class="text">продуктивность</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about">О программе</a></li>
+                <li><a href="#tools">Инструменты</a></li>
+                <li><a href="#program">Программа</a></li>
+                <li><a href="#pricing">Стоимость</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero секция -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Прокачай свою продуктивность<br>с помощью ИИ</h1>
+            <div class="subtitle">От <span class="chaos">хаоса</span> к <span class="system">системе</span></div>
+            <div class="tagline">Месяц интенсивной работы, чтобы освободить время для стратегии и получить контроль над бизнес-процессами</div>
+        </div>
+    </section>
+
+    <!-- Боль предпринимателя -->
+    <section class="section" id="about">
+        <h2 class="section-title">Боль предпринимателя</h2>
+        <p class="section-description">Я понимаю, с какими вызовами вы сталкиваетесь каждый день</p>
+        <ul class="features-list">
+            <li><strong>Потеря часов на рутину</strong> вместо стратегии</li>
+            <li><strong>Хаос в задачах и проектах</strong></li>
+            <li><strong>Невозможность найти нужную информацию</strong> — разговоры с клиентами, контракты, данные</li>
+            <li><strong>Усталость от количества информации</strong></li>
+            <li><strong>Отсутствие системы управления бизнес-знаниями</strong></li>
+        </ul>
+    </section>
+
+    <!-- Что можно автоматизировать -->
+    <section class="section section-alt">
+        <h2 class="section-title">Что можно автоматизировать уже в первый месяц</h2>
+        <ul class="features-list">
+            <li><strong>Обработка писем</strong> — сортировка, ответы, напоминания</li>
+            <li><strong>Планирование встреч</strong> — синхронизация календарей, напоминания</li>
+            <li><strong>Сбор и сохранение бизнес-данных</strong> — автоматический поиск и организация информации</li>
+            <li><strong>Генерация отчетов</strong> — создание регулярных отчетов из разных источников</li>
+            <li><strong>Транскрибация встреч</strong> — автоматическая запись и расшифровка разговоров с клиентами</li>
+            <li><strong>Организация документов</strong> — автоматическая сортировка контрактов и файлов</li>
+        </ul>
+        <div class="highlight-box">
+            <h4>Конкретные примеры</h4>
+            <ul class="features-list">
+                <li><strong>Telegram → транскрибация → сохранение</strong> — все встречи автоматически попадают в базу знаний</li>
+                <li><strong>Почта → фильтрация → задачи в календарь</strong> — важные письма превращаются в задачи</li>
+                <li><strong>Голосовые сообщения → текст → структурированные данные</strong> — диктовка превращается в организованную информацию</li>
+                <li><strong>Документы → обработка → сохранение</strong> — все файлы автоматически сортируются и сохраняются</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Три инструмента -->
+    <section class="section" id="tools">
+        <h2 class="section-title">Три инструмента, которые изменят ваш бизнес</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <h3>Автоматизация (n8n)</h3>
+                <p>Создавайте автоматизации без программирования и экономите часы каждый день. Первая автоматизация работает уже на второй неделе.</p>
+            </div>
+            <div class="card">
+                <h3>Второй мозг (Obsidian)</h3>
+                <p>Система управления бизнес-знаниями: разговоры с клиентами, контракты, данные — все в одном месте с мгновенным поиском.</p>
+            </div>
+            <div class="card">
+                <h3>AI-ускорение (Cursor)</h3>
+                <p>AI помощник для работы с кодом, текстами и задачами. Ускорение работы со знаниями в несколько раз.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Почему автоматизация, а не ассистент -->
+    <section class="section section-alt">
+        <h2 class="section-title">Почему автоматизация, а не ассистент?</h2>
+        <div class="two-columns">
+            <div>
+                <h3 class="section-subtitle">Три ключевых преимущества автоматизации</h3>
+                <ol class="numbered-list">
+                    <li><strong>Контроль и независимость</strong><br>Вы сами управляете системой, не зависите от людей. Ассистент может заболеть, уйти в отпуск, уволиться — ваша автоматизация работает всегда, когда нужно вам.</li>
+                    <li><strong>Масштабируемость</strong><br>Автоматизация работает 24/7 без перерывов и выходных. Ассистент работает 8 часов в день. Одна автоматизация может обрабатывать сотни задач одновременно, ассистент — одну за раз.</li>
+                    <li><strong>Навык на всю жизнь</strong><br>После программы вы можете развиваться самостоятельно. Вы не просто получаете готовое решение — вы получаете навык создавать автоматизации для любых задач. Ассистент уходит — навык остается с вами навсегда.</li>
+                </ol>
+            </div>
+            <div>
+                <h3 class="section-subtitle">Почему не просто нанять ассистента?</h3>
+                <p class="section-description" style="margin-bottom: var(--space-md);">Ассистент освободит время завтра, но:</p>
+                <ul class="features-list">
+                    <li>Вы зависите от человека (болезни, отпуска, увольнения)</li>
+                    <li>Нужна постоянная оплата (80-150К в месяц)</li>
+                    <li>Ограниченная масштабируемость</li>
+                    <li>Нет навыка для самостоятельного развития</li>
+                </ul>
+                <div class="highlight-box">
+                    <p style="font-size: 20px; font-weight: 600; color: var(--text-dark); margin-bottom: 0;"><strong>Автоматизация дает контроль, независимость и навык на всю жизнь.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Эмоциональное и социальное измерение -->
+    <section class="section">
+        <h2 class="section-title">Эмоциональное и социальное измерение</h2>
+        <p class="section-description">Владелец бизнеса хочет не просто освободить время. Он хочет:</p>
+        <div class="cards-grid">
+            <div class="card">
+                <h3>Чувствовать себя современным</h3>
+                <p>"Я использую ИИ, я не отстаю"</p>
+            </div>
+            <div class="card">
+                <h3>Выглядеть компетентным перед командой</h3>
+                <p>"Я могу показать им как автоматизировать"</p>
+            </div>
+            <div class="card">
+                <h3>Не чувствовать себя глупым</h3>
+                <p>"Я понимаю эти новые технологии"</p>
+            </div>
+        </div>
+        <div class="highlight-box">
+            <p style="font-size: 20px; margin-bottom: 0;">Программа помогает преодолеть страх перед новыми технологиями и дает уверенность в использовании ИИ-инструментов.</p>
+        </div>
+    </section>
+
+    <!-- Почему не просто курс -->
+    <section class="section section-alt">
+        <h2 class="section-title">Почему не просто курс?</h2>
+        <div class="two-columns">
+            <div class="highlight-box">
+                <h4>Отличие от онлайн-курсов</h4>
+                <ul class="features-list">
+                    <li><strong>Персональное сопровождение</strong> — работа с тренером, а не с записью</li>
+                    <li><strong>Работа с реальными задачами</strong> — автоматизируем то, что нужно именно вам</li>
+                    <li><strong>Ежедневная поддержка</strong> — помощь в момент, когда она нужна</li>
+                </ul>
+            </div>
+            <div class="highlight-box">
+                <h4>Отличие от обычного консалтинга</h4>
+                <ul class="features-list">
+                    <li><strong>Я не делаю работу за вас</strong> — я учу вас делать самим</li>
+                    <li><strong>Вы получаете навыки, а не готовое решение</strong> — можете развиваться дальше самостоятельно</li>
+                    <li><strong>Фокус на первых лицах</strong> — только владельцы и директора</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Как это работает -->
+    <section class="section" id="how-it-works">
+        <h2 class="section-title">Как это работает (1 месяц)</h2>
+        <ul class="features-list">
+            <li><strong>2 занятия</strong> в неделю по 1.5 часа</li>
+            <li><strong>1 час в день</strong> самостоятельной работы</li>
+            <li><strong>Ежедневное подведение итогов</strong> (интенсив) или еженедельный контроль (лайт)</li>
+            <li><strong>Чат для общения и вопросов</strong></li>
+            <li><strong>Ваш темп</strong> — ускорить или замедлить когда нужно</li>
+        </ul>
+        <div class="highlight-box">
+            <p style="font-size: 20px; margin-bottom: 0;"><strong>После месяца:</strong> ретроспектива и обоюдное решение о продолжении (если нужно).</p>
+        </div>
+    </section>
+
+    <!-- Четыре недели программы -->
+    <section class="section section-alt" id="program">
+        <h2 class="section-title">Четыре недели программы</h2>
+        <div class="weeks-grid">
+            <div class="week-card">
+                <h4>Неделя 1</h4>
+                <p>Знакомство</p>
+                <div class="result">Аудит текущего состояния и изучение основ автоматизации</div>
+            </div>
+            <div class="week-card">
+                <h4>Неделя 2</h4>
+                <p>Автоматизация</p>
+                <div class="result">Создаем первую автоматизацию для самой болезненной рутинной операции</div>
+            </div>
+            <div class="week-card">
+                <h4>Неделя 3</h4>
+                <p>Второй мозг</p>
+                <div class="result">Настройка системы управления бизнес-знаниями</div>
+            </div>
+            <div class="week-card">
+                <h4>Неделя 4</h4>
+                <p>AI-ускорение</p>
+                <div class="result">Настройка AI помощника для работы со знаниями и задачами</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Бизнес-результаты -->
+    <section class="section">
+        <h2 class="section-title">Бизнес-результаты первого месяца</h2>
+        <ul class="features-list">
+            <li><strong>До 5 часов в неделю</strong> освобождено за счет автоматизации</li>
+            <li><strong>Все бизнес-данные в одном месте</strong> — мгновенный поиск по разговорам с клиентами, контрактам, документам</li>
+            <li><strong>Первая автоматизация работает</strong> — реальная экономия времени каждый день</li>
+            <li><strong>Преодолено сопротивление</strong> — вы уверенно используете новые инструменты</li>
+            <li><strong>Система управления знаниями</strong> создана и развивается</li>
+        </ul>
+        <div class="highlight-box">
+            <h4>Окупаемость программы</h4>
+            <p>Если час вашего времени стоит <strong>N рублей</strong>, то экономия <strong>до 5 часов в неделю</strong> = <strong>до 20 часов в месяц</strong> = программа окупается уже в первый месяц.</p>
+        </div>
+    </section>
+
+    <!-- Два формата программы -->
+    <section class="section section-alt" id="pricing">
+        <h2 class="section-title">Два формата программы</h2>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>Интенсив</h3>
+                <div class="price">200 тыс ₽</div>
+                <div class="price-period">/ месяц</div>
+                <ul>
+                    <li>Ежедневное подведение итогов (5+ раз в неделю)</li>
+                    <li>Максимальная поддержка и контроль</li>
+                    <li>Быстрый прогресс и результаты</li>
+                    <li><strong>Результат в 10 раз быстрее</strong> — ежедневная работа дает нелинейный эффект</li>
+                </ul>
+            </div>
+            <div class="price-card">
+                <h3>Лайт</h3>
+                <div class="price">100 тыс ₽</div>
+                <div class="price-period">/ месяц</div>
+                <ul>
+                    <li>Еженедельный контроль</li>
+                    <li>Больше самостоятельности</li>
+                    <li>Подходит для тех, кто уверен в своей дисциплине</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Для кого эта программа -->
+    <section class="section">
+        <h2 class="section-title">Для кого эта программа</h2>
+        <h3 class="section-subtitle">Только для первых лиц компаний</h3>
+        <ul class="features-list">
+            <li>Владельцы бизнеса</li>
+            <li>Генеральные директора</li>
+            <li>Первые лица, которые имеют авторитет для внедрения изменений</li>
+        </ul>
+        <div class="highlight-box">
+            <h4>Почему только первые лица?</h4>
+            <p>Изменения должны идти сверху вниз. Только первое лицо может внедрить изменения в компании.</p>
+        </div>
+    </section>
+
+    <!-- Что вы получите -->
+    <section class="section section-alt">
+        <h2 class="section-title">Что вы получите</h2>
+        <div class="two-columns">
+            <div>
+                <h3 class="section-subtitle">База знаний "ИИ продуктивность"</h3>
+                <p class="section-description" style="margin-bottom: var(--space-md);">После прохождения программы вы получаете доступ к структурированной базе знаний с материалами:</p>
+                <ul class="features-list">
+                    <li><strong>Основы автоматизации</strong> — как работают автоматизации</li>
+                    <li><strong>Методы и подходы</strong> — как находить задачи для автоматизации и проектировать решения</li>
+                    <li><strong>Шаблоны для работы с AI</strong> — готовые промпты для быстрого старта</li>
+                    <li><strong>Справочник</strong> — ответы на частые вопросы и словарь терминов</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="section-subtitle">Навыки на всю жизнь</h3>
+                <ul class="features-list">
+                    <li>Вы можете продолжать развиваться самостоятельно</li>
+                    <li>У вас есть все инструменты и навыки для создания автоматизаций</li>
+                    <li>Вы можете обучать свою команду</li>
+                    <li>Готовность к программе "Командная продуктивность" (следующий этап)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>От хаоса к системе</h3>
+            <p style="margin-top: var(--space-md); margin-bottom: var(--space-sm);">Освободи время для стратегии. Автоматизируй рутину. Управляй бизнес-знаниями. Получи контроль над процессами.</p>
+            <p style="font-size: 24px; font-weight: 600; margin-bottom: 0;">Месяц интенсивной работы.<br>Инвестируй в себя. Начни сегодня.</p>
+        </div>
+    </footer>
+
+    <!-- Мобильное меню -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#about">О программе</a></li>
+            <li><a href="#tools">Инструменты</a></li>
+            <li><a href="#program">Программа</a></li>
+            <li><a href="#pricing">Стоимость</a></li>
+        </ul>
+    </div>
+
+    <!-- Кнопка наверх -->
+    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Наверх">↑</button>
+
+    <script>
+        // Навигация при скролле
+        const navbar = document.getElementById('navbar');
+        const scrollTop = document.getElementById('scrollTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+                scrollTop.classList.add('visible');
+            } else {
+                navbar.classList.remove('scrolled');
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        // Мобильное меню
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Закрытие мобильного меню при клике на ссылку
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Плавная прокрутка для ссылок
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const targetPosition = target.offsetTop - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Анимации при скролле
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Применяем анимации к элементам
+        document.querySelectorAll('.card').forEach((el, index) => {
+            el.classList.add('fade-in');
+            el.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(el);
+        });
+
+        document.querySelectorAll('.highlight-box').forEach(el => {
+            el.classList.add('fade-in');
+            observer.observe(el);
+        });
+
+        document.querySelectorAll('.week-card').forEach((el, index) => {
+            el.classList.add('scale-in');
+            el.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(el);
+        });
+
+        document.querySelectorAll('.price-card').forEach((el, index) => {
+            el.classList.add('scale-in');
+            el.style.transitionDelay = `${index * 0.15}s`;
+            observer.observe(el);
+        });
+
+        document.querySelectorAll('.two-columns > div').forEach((el, index) => {
+            if (index % 2 === 0) {
+                el.classList.add('slide-in-left');
+            } else {
+                el.classList.add('slide-in-right');
+            }
+            observer.observe(el);
+        });
+
+        // Анимация для hero секции
+        const heroContent = document.querySelector('.hero-content');
+        if (heroContent) {
+            heroContent.classList.add('fade-in');
+            heroContent.classList.add('visible');
+        }
+    </script>
+</body>
+</html>
+
+
+
