@@ -1,1332 +1,522 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Прокачай свою продуктивность с помощью ИИ. От хаоса к системе</title>
+    <title>ИИ Продуктивность — От хаоса к системе</title>
+    <meta name="description" content="Месячная программа автоматизации для предпринимателей. Освободите время для стратегии с помощью n8n, Obsidian и AI.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            /* Цвета - палитра на основе логотипа */
-            --deep-purple: #6B46C1;
-            --royal-blue: #2563EB;
-            --teal: #14B8A6;
-            --primary-gradient: linear-gradient(135deg, #6B46C1 0%, #2563EB 100%);
-            --secondary-gradient: linear-gradient(135deg, #2563EB 0%, #14B8A6 100%);
-            --accent-gradient: linear-gradient(135deg, #14B8A6 0%, #5EEAD4 100%);
-            --dark-gradient: linear-gradient(135deg, #4C1D95 0%, #1E3A8A 100%);
-            --light-bg: #f8f9fa;
-            --white: #ffffff;
-            --text-dark: #1a202c;
-            --text-gray: #4a5568;
-            --text-light: #718096;
-            --border-color: #e2e8f0;
-            
-            /* Тени */
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
-            --shadow-xl: 0 20px 40px rgba(0,0,0,0.2);
-            
-            /* Spacing система (8px базовая единица) */
-            --space-xs: 8px;
-            --space-sm: 16px;
-            --space-md: 24px;
-            --space-lg: 32px;
-            --space-xl: 48px;
-            --space-2xl: 64px;
-            --space-3xl: 80px;
-            --space-4xl: 96px;
-            
-            /* Переходы */
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            
-            /* Контейнер */
-            --container-max-width: 1200px;
-            --container-padding: var(--space-lg);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--white);
-            color: var(--text-dark);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        /* Навигация */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow-sm);
-            z-index: 1000;
-            transition: var(--transition);
-        }
-
-        .navbar.scrolled {
-            box-shadow: var(--shadow-md);
-        }
-
-        .nav-container {
-            max-width: var(--container-max-width);
-            margin: 0 auto;
-            padding: var(--space-sm) var(--container-padding);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .logo img {
-            height: 50px;
-            width: auto;
-            object-fit: contain;
-        }
-
-        @media (max-width: 768px) {
-            .logo img {
-                height: 40px;
-            }
-        }
-
-        .nav-links {
-            display: flex;
-            gap: var(--space-lg);
-            list-style: none;
-        }
-
-        .mobile-menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: var(--space-xs);
-        }
-
-        .mobile-menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-dark);
-            border-radius: 2px;
-            transition: var(--transition);
-        }
-
-        .mobile-menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-
-        .mobile-menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-gray);
-            font-weight: 500;
-            font-size: 15px;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-gradient);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover {
-            color: var(--text-dark);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .cta-button {
-            background: var(--primary-gradient);
-            color: white;
-            padding: 12px var(--space-md);
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            transition: var(--transition);
-            box-shadow: var(--shadow-md);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* Hero секция */
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--primary-gradient);
-            color: white;
-            text-align: center;
-            padding: calc(100px + var(--space-3xl)) var(--container-padding) var(--space-3xl);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-size: clamp(42px, 8vw, 72px);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: var(--space-md);
-            letter-spacing: -0.02em;
-        }
-
-        .hero .subtitle {
-            font-size: clamp(28px, 4vw, 42px);
-            font-weight: 600;
-            margin-bottom: var(--space-sm);
-            opacity: 1;
-            letter-spacing: -0.01em;
-        }
-
-        .hero .subtitle .chaos {
-            color: #F472B6;
-            font-weight: 700;
-            text-shadow: 0 2px 10px rgba(244, 114, 182, 0.3);
-        }
-
-        .hero .subtitle .system {
-            color: #14B8A6;
-            font-weight: 700;
-            text-shadow: 0 2px 10px rgba(20, 184, 166, 0.3);
-        }
-
-        .hero .tagline {
-            font-size: clamp(18px, 2.5vw, 24px);
-            font-weight: 400;
-            opacity: 0.9;
-            margin-bottom: 0;
-            margin-top: var(--space-md);
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: var(--space-sm);
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: var(--space-lg);
-        }
-
-        .btn-primary {
-            background: white;
-            color: #6B46C1;
-            padding: var(--space-sm) var(--space-lg);
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 18px;
-            transition: var(--transition);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: var(--space-sm) var(--space-lg);
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 18px;
-            transition: var(--transition);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* Секции */
-        .section {
-            padding: var(--space-3xl) var(--container-padding);
-            max-width: var(--container-max-width);
-            margin: 0 auto;
-        }
-
-        .section-alt {
-            background: var(--light-bg);
-        }
-
-        .section-title {
-            font-size: clamp(36px, 5vw, 56px);
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: var(--space-sm);
-            letter-spacing: -0.02em;
-            color: var(--text-dark);
-        }
-
-        .section-subtitle {
-            font-size: clamp(20px, 2.5vw, 28px);
-            font-weight: 600;
-            margin-bottom: var(--space-sm);
-            color: var(--text-dark);
-        }
-
-        .section-description {
-            font-size: 20px;
-            color: var(--text-gray);
-            margin-bottom: var(--space-md);
-            max-width: 700px;
-            line-height: 1.7;
-        }
-
-        /* Карточки */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-md);
-            margin-top: var(--space-xl);
-        }
-
-        .card {
-            background: var(--white);
-            border-radius: 20px;
-            padding: var(--space-lg);
-            box-shadow: var(--shadow-md);
-            border: 2px solid transparent;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--primary-gradient);
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
-            border-color: #6B46C1;
-        }
-
-        .card h3 {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: var(--space-sm);
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.3;
-        }
-
-        .card p {
-            color: var(--text-gray);
-            line-height: 1.7;
-            margin: 0;
-        }
-
-        /* Списки */
-        .features-list {
-            list-style: none;
-            padding: 0;
-            margin: var(--space-xl) 0 0;
-        }
-
-        .features-list li {
-            position: relative;
-            padding-left: 48px;
-            margin-bottom: var(--space-md);
-            font-size: 18px;
-            line-height: 1.7;
-            color: var(--text-gray);
-        }
-
-        .features-list li:last-child {
-            margin-bottom: 0;
-        }
-
-        .features-list li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            top: 2px;
-            width: 32px;
-            height: 32px;
-            background: var(--deep-purple);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 16px;
-            flex-shrink: 0;
-        }
-
-        .features-list li strong {
-            color: var(--text-dark);
-            font-weight: 600;
-        }
-
-        /* Акцентные блоки */
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(107, 70, 193, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
-            border-left: 4px solid #6B46C1;
-            border-radius: 16px;
-            padding: var(--space-lg);
-            margin-top: var(--space-xl);
-        }
-
-        .highlight-box h4 {
-            font-size: 22px;
-            color: #6B46C1;
-            margin-bottom: var(--space-sm);
-            font-weight: 600;
-            line-height: 1.3;
-        }
-
-        .highlight-box p {
-            font-size: 18px;
-            color: var(--text-gray);
-            margin-bottom: var(--space-sm);
-            line-height: 1.7;
-        }
-
-        .highlight-box p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Двухколоночный layout */
-        .two-columns {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: var(--space-xl);
-            margin-top: var(--space-xl);
-        }
-
-        /* Недели */
-        .weeks-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-md);
-            margin-top: var(--space-xl);
-        }
-
-        .week-card {
-            background: var(--white);
-            border-radius: 16px;
-            padding: var(--space-lg);
-            text-align: center;
-            box-shadow: var(--shadow-md);
-            border-top: 4px solid;
-            transition: var(--transition);
-        }
-
-        .week-card:nth-child(1) { border-top-color: #6B46C1; }
-        .week-card:nth-child(2) { border-top-color: #2563EB; }
-        .week-card:nth-child(3) { border-top-color: #14B8A6; }
-        .week-card:nth-child(4) { border-top-color: #7C3AED; }
-
-        .week-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .week-card h4 {
-            font-size: 24px;
-            margin-bottom: var(--space-xs);
-            color: var(--text-dark);
-            font-weight: 600;
-            line-height: 1.3;
-        }
-
-        .week-card p {
-            font-size: 16px;
-            color: var(--text-light);
-            margin: 0 0 var(--space-sm);
-            font-weight: 500;
-        }
-
-        .week-card .result {
-            margin-top: var(--space-sm);
-            padding-top: var(--space-sm);
-            border-top: 1px solid var(--border-color);
-            font-size: 14px;
-            color: var(--text-gray);
-            font-style: italic;
-            line-height: 1.6;
-        }
-
-        /* Цены */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: var(--space-xl);
-            margin-top: var(--space-xl);
-        }
-
-        .price-card {
-            background: var(--white);
-            border-radius: 24px;
-            padding: var(--space-2xl);
-            text-align: center;
-            box-shadow: var(--shadow-lg);
-            border: 3px solid transparent;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .price-card::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 24px;
-            padding: 3px;
-            background: var(--primary-gradient);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask-composite: exclude;
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .price-card:hover::before {
-            opacity: 1;
-        }
-
-        .price-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .price-card h3 {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: var(--space-md);
-            color: var(--text-dark);
-        }
-
-        .price {
-            font-size: 64px;
-            font-weight: 800;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: var(--space-md) 0;
-            line-height: 1;
-        }
-
-        .price-period {
-            font-size: 18px;
-            color: var(--text-light);
-            margin-bottom: var(--space-lg);
-        }
-
-        .price-card ul {
-            text-align: left;
-            list-style: none;
-            padding: 0;
-            margin: var(--space-lg) 0 0;
-        }
-
-        .price-card ul li {
-            padding-left: var(--space-lg);
-            margin-bottom: var(--space-sm);
-            position: relative;
-            font-size: 16px;
-            line-height: 1.6;
-            color: var(--text-gray);
-        }
-
-        .price-card ul li:last-child {
-            margin-bottom: 0;
-        }
-
-        .price-card ul li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #6B46C1;
-            font-weight: 700;
-            font-size: 18px;
-        }
-
-        /* Нумерованный список */
-        .numbered-list {
-            counter-reset: item;
-            list-style: none;
-            padding: 0;
-            margin: var(--space-xl) 0 0;
-        }
-
-        .numbered-list li {
-            counter-increment: item;
-            position: relative;
-            padding-left: 72px;
-            margin-bottom: var(--space-lg);
-            font-size: 18px;
-            line-height: 1.7;
-            color: var(--text-gray);
-        }
-
-        .numbered-list li:last-child {
-            margin-bottom: 0;
-        }
-
-        .numbered-list li::before {
-            content: counter(item);
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 48px;
-            height: 48px;
-            background: var(--royal-blue);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        .numbered-list li strong {
-            color: var(--text-dark);
-            font-weight: 600;
-            display: block;
-            margin-bottom: var(--space-xs);
-        }
-
-        /* Кнопка наверх */
-        .scroll-top {
-            position: fixed;
-            bottom: var(--space-lg);
-            right: var(--space-lg);
-            width: 56px;
-            height: 56px;
-            background: var(--primary-gradient);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: 700;
-            box-shadow: var(--shadow-lg);
-            transition: var(--transition);
-            z-index: 999;
-        }
-
-        .scroll-top:hover {
-            transform: translateY(-6px) scale(1.1);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .scroll-top.visible {
-            display: flex;
-            animation: fadeInUp 0.3s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Футер */
-        .footer {
-            background: var(--dark-gradient);
-            color: white;
-            padding: var(--space-2xl) var(--container-padding);
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: var(--container-max-width);
-            margin: 0 auto;
-        }
-
-        .footer h3 {
-            font-size: 28px;
-            margin-bottom: var(--space-sm);
-            font-weight: 700;
-        }
-
-        .footer p {
-            font-size: 18px;
-            opacity: 0.9;
-            margin-bottom: var(--space-lg);
-            line-height: 1.7;
-        }
-
-        .footer p:last-child {
-            margin-bottom: 0;
-        }
-
-        .footer-cta {
-            display: inline-block;
-            background: white;
-            color: #6B46C1;
-            padding: var(--space-sm) var(--space-lg);
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 18px;
-            transition: var(--transition);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .footer-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        /* Мобильное меню */
-        .mobile-menu {
-            position: fixed;
-            top: 70px;
-            left: 0;
-            right: 0;
-            background: var(--white);
-            box-shadow: var(--shadow-lg);
-            padding: var(--space-md);
-            display: none;
-            z-index: 999;
-            transform: translateY(-100%);
-            transition: transform 0.3s ease;
-        }
-
-        .mobile-menu.active {
-            transform: translateY(0);
-        }
-
-        .mobile-menu ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
-        }
-
-        .mobile-menu a {
-            text-decoration: none;
-            color: var(--text-gray);
-            font-weight: 500;
-            font-size: 18px;
-            padding: var(--space-sm);
-            display: block;
-            border-radius: 8px;
-            transition: var(--transition);
-        }
-
-        .mobile-menu a:hover {
-            background: var(--light-bg);
-            color: var(--text-dark);
-        }
-
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            :root {
-                --container-padding: var(--space-md);
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-toggle {
-                display: flex;
-            }
-
-            .mobile-menu {
-                display: block;
-            }
-
-            .section {
-                padding: var(--space-2xl) var(--container-padding);
-            }
-
-            .two-columns {
-                grid-template-columns: 1fr;
-                gap: var(--space-lg);
-            }
-
-            .pricing-grid {
-                grid-template-columns: 1fr;
-                gap: var(--space-lg);
-            }
-
-            .weeks-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: var(--space-sm);
-            }
-
-            .scroll-top {
-                bottom: var(--space-md);
-                right: var(--space-md);
-                width: 50px;
-                height: 50px;
-            }
-
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .weeks-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-            }
-
-            .btn-primary,
-            .btn-secondary {
-                width: 100%;
-            }
-
-            .two-columns {
-                grid-template-columns: 1fr;
-            }
-
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Анимации при скролле */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .slide-in-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .slide-in-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide-in-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .slide-in-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .scale-in {
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .scale-in.visible {
-            opacity: 1;
-            transform: scale(1);
+            font-family: 'Inter', sans-serif;
         }
     </style>
 </head>
-<body>
-
-    <!-- Навигация -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#home" class="logo">
-                <img src="assets/logo-big.jpg" alt="AI продуктивность">
-            </a>
-            <ul class="nav-links">
-                <li><a href="#about">О программе</a></li>
-                <li><a href="#tools">Инструменты</a></li>
-                <li><a href="#program">Программа</a></li>
-                <li><a href="#pricing">Стоимость</a></li>
-            </ul>
-            <div class="mobile-menu-toggle" id="mobileMenuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+<body class="bg-white">
+    <!-- Header -->
+    <header class="bg-[#E8E8E8] h-20 flex items-center justify-between px-[60px] sticky top-0 z-50">
+        <div class="flex items-center gap-[10px]">
+            <div class="w-10 h-10 bg-cover bg-center" style="background-image: url('./images/master-logo-white2.jpg');"></div>
+            <span class="text-[#0A0A12] text-[20px] font-bold">мастер данных</span>
         </div>
-    </nav>
+        <nav class="flex items-center gap-10">
+            <a href="#about" class="text-[#0A0A12] text-base font-semibold hover:opacity-70 transition">О программе</a>
+            <a href="#tools" class="text-[#0A0A12] text-base font-semibold hover:opacity-70 transition">Инструменты</a>
+            <a href="#program" class="text-[#0A0A12] text-base font-semibold hover:opacity-70 transition">Программа</a>
+            <a href="#pricing" class="text-[#0A0A12] text-base font-semibold hover:opacity-70 transition">Стоимость</a>
+        </nav>
+    </header>
 
-    <!-- Hero секция -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Прокачай свою продуктивность<br>с помощью ИИ</h1>
-            <div class="subtitle">От <span class="chaos">хаоса</span> к <span class="system">системе</span></div>
-            <div class="tagline">Месяц интенсивной работы, чтобы освободить время для стратегии и получить контроль над бизнес-процессами</div>
+    <!-- Hero Section -->
+    <section class="bg-[#0A0A12] flex h-[820px]">
+        <div class="flex-1 overflow-hidden flex items-center justify-center">
+            <img src="./images/vlad-photo.jpeg" alt="Владислав Каменский" class="w-full h-full object-cover" style="object-position: center 30%;">
         </div>
-    </section>
-
-    <!-- Боль предпринимателя -->
-    <section class="section" id="about">
-        <h2 class="section-title">Боль предпринимателя</h2>
-        <p class="section-description">Я понимаю, с какими вызовами вы сталкиваетесь каждый день</p>
-        <ul class="features-list">
-            <li><strong>Потеря часов на рутину</strong> вместо стратегии</li>
-            <li><strong>Хаос в задачах и проектах</strong></li>
-            <li><strong>Невозможность найти нужную информацию</strong> – разговоры с клиентами, контракты, данные</li>
-            <li><strong>Усталость от количества информации</strong></li>
-            <li><strong>Отсутствие системы управления бизнес-знаниями</strong></li>
-        </ul>
-    </section>
-
-    <!-- Что можно автоматизировать -->
-    <section class="section section-alt">
-        <h2 class="section-title">Что можно автоматизировать уже в первый месяц</h2>
-        <ul class="features-list">
-            <li><strong>Обработка писем</strong> – сортировка, ответы, напоминания</li>
-            <li><strong>Планирование встреч</strong> – синхронизация календарей, напоминания</li>
-            <li><strong>Сбор и сохранение бизнес-данных</strong> – автоматический поиск и организация информации</li>
-            <li><strong>Генерация отчетов</strong> – создание регулярных отчетов из разных источников</li>
-            <li><strong>Транскрибация встреч</strong> – автоматическая запись и расшифровка разговоров с клиентами</li>
-            <li><strong>Организация документов</strong> – автоматическая сортировка контрактов и файлов</li>
-        </ul>
-        <div class="highlight-box">
-            <h4>Конкретные примеры</h4>
-            <ul class="features-list">
-                <li><strong>Telegram → транскрибация → сохранение</strong> – все встречи автоматически попадают в базу знаний</li>
-                <li><strong>Почта → фильтрация → задачи в календарь</strong> – важные письма превращаются в задачи</li>
-                <li><strong>Голосовые сообщения → текст → структурированные данные</strong> – диктовка превращается в организованную информацию</li>
-                <li><strong>Документы → обработка → сохранение</strong> – все файлы автоматически сортируются и сохраняются</li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- Три инструмента -->
-    <section class="section" id="tools">
-        <h2 class="section-title">Три инструмента, которые изменят ваш бизнес</h2>
-        <div class="cards-grid">
-            <div class="card">
-                <h3>Автоматизация (n8n)</h3>
-                <p>Создавайте автоматизации без программирования и экономите часы каждый день. Первая автоматизация работает уже на второй неделе.</p>
-            </div>
-            <div class="card">
-                <h3>Второй мозг (Obsidian)</h3>
-                <p>Система управления бизнес-знаниями: разговоры с клиентами, контракты, данные – все в одном месте с мгновенным поиском.</p>
-            </div>
-            <div class="card">
-                <h3>AI-ускорение (Cursor)</h3>
-                <p>AI помощник для работы с кодом, текстами и задачами. Ускорение работы со знаниями в несколько раз.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Почему автоматизация, а не ассистент -->
-    <section class="section section-alt">
-        <h2 class="section-title">Почему автоматизация, а не ассистент?</h2>
-        <div class="two-columns">
-            <div>
-                <h3 class="section-subtitle">Три ключевых преимущества автоматизации</h3>
-                <ol class="numbered-list">
-                    <li><strong>Контроль и независимость</strong><br>Вы сами управляете системой, не зависите от людей. Ассистент может заболеть, уйти в отпуск, уволиться – ваша автоматизация работает всегда, когда нужно вам.</li>
-                    <li><strong>Масштабируемость</strong><br>Автоматизация работает 24/7 без перерывов и выходных. Ассистент работает 8 часов в день. Одна автоматизация может обрабатывать сотни задач одновременно, ассистент – одну за раз.</li>
-                    <li><strong>Навык на всю жизнь</strong><br>После программы вы можете развиваться самостоятельно. Вы не просто получаете готовое решение – вы получаете навык создавать автоматизации для любых задач. Ассистент уходит – навык остается с вами навсегда.</li>
-                </ol>
+        <div class="w-[700px] flex flex-col justify-center gap-10 px-[60px]">
+            <div class="flex flex-col gap-6">
+                <span class="text-[#1D7A74] text-xs font-semibold tracking-[3px]">ИИ ПРОДУКТИВНОСТЬ</span>
+                <h1 class="text-white text-[56px] font-bold leading-[1.1]">Прокачай свою<br>эффективность<br>с помощью ИИ</h1>
+                <div class="flex gap-2">
+                    <span class="text-white text-[28px] font-semibold">От</span>
+                    <span class="text-white text-[28px] font-bold">хаоса</span>
+                    <span class="text-white text-[28px] font-semibold">к</span>
+                    <span class="text-white text-[28px] font-bold">системе</span>
+                </div>
+                <p class="text-white text-lg font-normal leading-[1.6] opacity-70">Месяц интенсивной работы, чтобы освободить время для стратегии и получить контроль над бизнес-процессами</p>
             </div>
             <div>
-                <h3 class="section-subtitle">Почему не просто нанять ассистента?</h3>
-                <p class="section-description" style="margin-bottom: var(--space-md);">Ассистент освободит время завтра, но:</p>
-                <ul class="features-list">
-                    <li>Вы зависите от человека (болезни, отпуска, увольнения)</li>
-                    <li>Нужна постоянная оплата (80-150К в месяц)</li>
-                    <li>Ограниченная масштабируемость</li>
-                    <li>Нет навыка для самостоятельного развития</li>
-                </ul>
-                <div class="highlight-box">
-                    <p style="font-size: 20px; font-weight: 600; color: var(--text-dark); margin-bottom: 0;"><strong>Автоматизация дает контроль, независимость и навык на всю жизнь.</strong></p>
+                <a href="#pricing" class="inline-flex items-center justify-center bg-[#1D7A74] text-white text-base font-semibold px-8 py-4 rounded-lg hover:bg-[#15615C] transition">Начать трансформацию</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pain Section -->
+    <section id="about" class="bg-white py-[100px] px-20 relative">
+        <div class="absolute inset-0 opacity-[0.07] bg-contain bg-center bg-no-repeat pointer-events-none" style="background-image: url('./images/logo-big.jpg');"></div>
+        <div class="relative max-w-7xl mx-auto flex flex-col gap-[60px]">
+            <div class="flex flex-col gap-4">
+                <span class="text-[#0A0A12] text-xs font-medium tracking-[3px] opacity-50">ПРОБЛЕМА</span>
+                <h2 class="text-[#0A0A12] text-5xl font-semibold">Боль предпринимателя</h2>
+                <p class="text-[#0A0A12] text-lg font-normal leading-[1.6] opacity-70">Я понимаю, с какими вызовами вы сталкиваетесь каждый день</p>
+            </div>
+            <div class="flex gap-12">
+                <div class="flex-1 flex flex-col gap-8">
+                    <div class="flex gap-5">
+                        <span class="text-[#1D7A74] text-5xl font-extrabold opacity-30">01</span>
+                        <div class="flex-1 flex flex-col gap-2">
+                            <h3 class="text-[#0A0A12] text-xl font-semibold">Потеря времени</h3>
+                            <p class="text-[#0A0A12] text-base font-normal leading-[1.5] opacity-70">Часы уходят на рутину вместо стратегии</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-5">
+                        <span class="text-[#1D7A74] text-5xl font-extrabold opacity-30">02</span>
+                        <div class="flex-1 flex flex-col gap-2">
+                            <h3 class="text-[#0A0A12] text-xl font-semibold">Хаос в задачах</h3>
+                            <p class="text-[#0A0A12] text-base font-normal leading-[1.5] opacity-70">Проекты разбросаны, нет системы</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-5">
+                        <span class="text-[#1D7A74] text-5xl font-extrabold opacity-30">03</span>
+                        <div class="flex-1 flex flex-col gap-2">
+                            <h3 class="text-[#0A0A12] text-xl font-semibold">Потеря информации</h3>
+                            <p class="text-[#0A0A12] text-base font-normal leading-[1.5] opacity-70">Невозможно найти разговоры, контракты, данные</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 flex flex-col gap-8">
+                    <div class="flex gap-5">
+                        <span class="text-[#1D7A74] text-5xl font-extrabold opacity-30">04</span>
+                        <div class="flex-1 flex flex-col gap-2">
+                            <h3 class="text-[#0A0A12] text-xl font-semibold">Перегрузка</h3>
+                            <p class="text-[#0A0A12] text-base font-normal leading-[1.5] opacity-70">Усталость от количества информации</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-5">
+                        <span class="text-[#1D7A74] text-5xl font-extrabold opacity-30">05</span>
+                        <div class="flex-1 flex flex-col gap-2">
+                            <h3 class="text-[#0A0A12] text-xl font-semibold">Нет базы знаний</h3>
+                            <p class="text-[#0A0A12] text-base font-normal leading-[1.5] opacity-70">Отсутствие системы управления бизнес-знаниями</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Эмоциональное и социальное измерение -->
-    <section class="section">
-        <h2 class="section-title">Эмоциональное и социальное измерение</h2>
-        <p class="section-description">Владелец бизнеса хочет не просто освободить время. Он хочет:</p>
-        <div class="cards-grid">
-            <div class="card">
-                <h3>Чувствовать себя современным</h3>
-                <p>"Я использую ИИ, я не отстаю"</p>
+    <!-- Automation Section -->
+    <section class="bg-[#F5F5F7] py-[100px] px-20">
+        <div class="max-w-7xl mx-auto flex flex-col gap-[60px]">
+            <div class="flex flex-col gap-4">
+                <span class="text-[#0A0A12] text-xs font-medium tracking-[3px] opacity-50">АВТОМАТИЗАЦИЯ</span>
+                <h2 class="text-[#0A0A12] text-5xl font-semibold">Что можно автоматизировать уже в первый месяц</h2>
             </div>
-            <div class="card">
-                <h3>Выглядеть компетентным перед командой</h3>
-                <p>"Я могу показать им как автоматизировать"</p>
+            <div class="flex gap-6">
+                <div class="flex-1 flex flex-col gap-5">
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 bg-[#1D7A74] rounded-2xl flex items-center justify-center text-white text-sm font-bold">✓</div>
+                        <span class="text-[#0A0A12] text-lg font-normal opacity-80">Обработка писем — сортировка, ответы, напоминания</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 bg-[#1D7A74] rounded-2xl flex items-center justify-center text-white text-sm font-bold">✓</div>
+                        <span class="text-[#0A0A12] text-lg font-normal opacity-80">Планирование встреч — синхронизация календарей</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 bg-[#1D7A74] rounded-2xl flex items-center justify-center text-white text-sm font-bold">✓</div>
+                        <span class="text-[#0A0A12] text-lg font-normal opacity-80">Сбор и сохранение бизнес-данных</span>
+                    </div>
+                </div>
+                <div class="flex-1 flex flex-col gap-5">
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 bg-[#1D7A74] rounded-2xl flex items-center justify-center text-white text-sm font-bold">✓</div>
+                        <span class="text-[#0A0A12] text-lg font-normal opacity-80">Генерация отчетов из разных источников</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 bg-[#1D7A74] rounded-2xl flex items-center justify-center text-white text-sm font-bold">✓</div>
+                        <span class="text-[#0A0A12] text-lg font-normal opacity-80">Транскрибация встреч и разговоров с клиентами</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 bg-[#1D7A74] rounded-2xl flex items-center justify-center text-white text-sm font-bold">✓</div>
+                        <span class="text-[#0A0A12] text-lg font-normal opacity-80">Организация и сортировка документов</span>
+                    </div>
+                </div>
             </div>
-            <div class="card">
-                <h3>Не чувствовать себя глупым</h3>
-                <p>"Я понимаю эти новые технологии"</p>
-            </div>
-        </div>
-        <div class="highlight-box">
-            <p style="font-size: 20px; margin-bottom: 0;">Программа помогает преодолеть страх перед новыми технологиями и дает уверенность в использовании ИИ-инструментов.</p>
-        </div>
-    </section>
-
-    <!-- Почему не просто курс -->
-    <section class="section section-alt">
-        <h2 class="section-title">Почему не просто курс?</h2>
-        <div class="two-columns">
-            <div class="highlight-box">
-                <h4>Отличие от онлайн-курсов</h4>
-                <ul class="features-list">
-                    <li><strong>Персональное сопровождение</strong> – работа с тренером, а не с записью</li>
-                    <li><strong>Работа с реальными задачами</strong> – автоматизируем то, что нужно именно вам</li>
-                    <li><strong>Ежедневная поддержка</strong> – помощь в момент, когда она нужна</li>
-                </ul>
-            </div>
-            <div class="highlight-box">
-                <h4>Отличие от обычного консалтинга</h4>
-                <ul class="features-list">
-                    <li><strong>Я не делаю работу за вас</strong> – я учу вас делать самим</li>
-                    <li><strong>Вы получаете навыки, а не готовое решение</strong> – можете развиваться дальше самостоятельно</li>
-                    <li><strong>Фокус на первых лицах</strong> – только владельцы и директора</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Как это работает -->
-    <section class="section" id="how-it-works">
-        <h2 class="section-title">Как это работает (1 месяц)</h2>
-        <ul class="features-list">
-            <li><strong>2 занятия</strong> в неделю по 1.5 часа</li>
-            <li><strong>1 час в день</strong> самостоятельной работы</li>
-            <li><strong>Ежедневное подведение итогов</strong> (интенсив) или еженедельный контроль (лайт)</li>
-            <li><strong>Чат для общения и вопросов</strong></li>
-            <li><strong>Ваш темп</strong> – ускорить или замедлить когда нужно</li>
-        </ul>
-        <div class="highlight-box">
-            <p style="font-size: 20px; margin-bottom: 0;"><strong>После месяца:</strong> ретроспектива и обоюдное решение о продолжении (если нужно).</p>
-        </div>
-    </section>
-
-    <!-- Четыре недели программы -->
-    <section class="section section-alt" id="program">
-        <h2 class="section-title">Четыре недели программы</h2>
-        <div class="weeks-grid">
-            <div class="week-card">
-                <h4>Неделя 1</h4>
-                <p>Знакомство</p>
-                <div class="result">Аудит текущего состояния и изучение основ автоматизации</div>
-            </div>
-            <div class="week-card">
-                <h4>Неделя 2</h4>
-                <p>Автоматизация</p>
-                <div class="result">Создаем первую автоматизацию для самой болезненной рутинной операции</div>
-            </div>
-            <div class="week-card">
-                <h4>Неделя 3</h4>
-                <p>Второй мозг</p>
-                <div class="result">Настройка системы управления бизнес-знаниями</div>
-            </div>
-            <div class="week-card">
-                <h4>Неделя 4</h4>
-                <p>AI-ускорение</p>
-                <div class="result">Настройка AI помощника для работы со знаниями и задачами</div>
+            <div class="bg-white rounded-2xl p-8 border-2 border-[#1D7A7430] flex flex-col gap-6">
+                <h3 class="text-[#1D7A74] text-[22px] font-semibold">Конкретные примеры</h3>
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="bg-[#F5F5F7] rounded-xl p-5 flex flex-col gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1D7A74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        <p class="text-[#0A0A12] text-sm font-semibold leading-[1.4]">Telegram → транскрибация → база знаний</p>
+                        <p class="text-[#0A0A12] text-[13px] font-normal leading-[1.4] opacity-60">Все встречи автоматически сохраняются</p>
+                    </div>
+                    <div class="bg-[#F5F5F7] rounded-xl p-5 flex flex-col gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1D7A74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                        <p class="text-[#0A0A12] text-sm font-semibold leading-[1.4]">Почта → фильтрация → задачи в календарь</p>
+                        <p class="text-[#0A0A12] text-[13px] font-normal leading-[1.4] opacity-60">Важные письма превращаются в задачи</p>
+                    </div>
+                    <div class="bg-[#F5F5F7] rounded-xl p-5 flex flex-col gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1D7A74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                        <p class="text-[#0A0A12] text-sm font-semibold leading-[1.4]">Голос → текст → структурированные данные</p>
+                        <p class="text-[#0A0A12] text-[13px] font-normal leading-[1.4] opacity-60">Диктовка становится организованной</p>
+                    </div>
+                    <div class="bg-[#F5F5F7] rounded-xl p-5 flex flex-col gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1D7A74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><line x1="10" y1="9" x2="8" y2="9"></line></svg>
+                        <p class="text-[#0A0A12] text-sm font-semibold leading-[1.4]">Документы → обработка → сохранение</p>
+                        <p class="text-[#0A0A12] text-[13px] font-normal leading-[1.4] opacity-60">Файлы автоматически сортируются</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Бизнес-результаты -->
-    <section class="section">
-        <h2 class="section-title">Бизнес-результаты первого месяца</h2>
-        <ul class="features-list">
-            <li><strong>До 5 часов в неделю</strong> освобождено за счет автоматизации</li>
-            <li><strong>Все бизнес-данные в одном месте</strong> – мгновенный поиск по разговорам с клиентами, контрактам, документам</li>
-            <li><strong>Первая автоматизация работает</strong> – реальная экономия времени каждый день</li>
-            <li><strong>Преодолено сопротивление</strong> – вы уверенно используете новые инструменты</li>
-            <li><strong>Система управления знаниями</strong> создана и развивается</li>
-        </ul>
-        <div class="highlight-box">
-            <h4>Окупаемость программы</h4>
-            <p>Если час вашего времени стоит <strong>N рублей</strong>, то экономия <strong>до 5 часов в неделю</strong> = <strong>до 20 часов в месяц</strong> = программа окупается уже в первый месяц.</p>
-        </div>
-    </section>
-
-    <!-- Два формата программы -->
-    <section class="section section-alt" id="pricing">
-        <h2 class="section-title">Два формата программы</h2>
-        <div class="pricing-grid">
-            <div class="price-card">
-                <h3>Интенсив</h3>
-                <div class="price">250 тыс ₽</div>
-                <div class="price-period">/ месяц</div>
-                <ul>
-                    <li>Ежедневное подведение итогов (5+ раз в неделю)</li>
-                    <li>Максимальная поддержка и контроль</li>
-                    <li>Быстрый прогресс и результаты</li>
-                    <li><strong>Результат в 10 раз быстрее</strong> – ежедневная работа дает нелинейный эффект</li>
-                </ul>
+    <!-- Tools Section -->
+    <section id="tools" class="bg-white py-[100px] px-20">
+        <div class="max-w-7xl mx-auto flex flex-col gap-[60px]">
+            <div class="flex flex-col gap-4">
+                <span class="text-[#0A0A12] text-xs font-medium tracking-[3px] opacity-50">ИНСТРУМЕНТЫ</span>
+                <h2 class="text-[#0A0A12] text-5xl font-semibold">Три инструмента, которые изменят ваш бизнес</h2>
             </div>
-            <div class="price-card">
-                <h3>Лайт</h3>
-                <div class="price">150 тыс ₽</div>
-                <div class="price-period">/ месяц</div>
-                <ul>
-                    <li>Еженедельный контроль</li>
-                    <li>Больше самостоятельности</li>
-                    <li>Подходит для тех, кто уверен в своей дисциплине</li>
-                </ul>
+            <div class="flex gap-6">
+                <div class="flex-1 bg-[#F0F0F5] rounded-2xl p-8 flex flex-col gap-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1D7A74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    <div class="flex flex-col gap-3">
+                        <h3 class="text-[#0A0A12] text-2xl font-semibold">Автоматизация (n8n)</h3>
+                        <p class="text-[#0A0A12] text-base font-normal leading-[1.6] opacity-70">Создавайте автоматизации без программирования и экономьте часы каждый день. Первая автоматизация работает уже на второй неделе.</p>
+                    </div>
+                </div>
+                <div class="flex-1 bg-[#F0F0F5] rounded-2xl p-8 flex flex-col gap-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1D7A74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"></path><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"></path></svg>
+                    <div class="flex flex-col gap-3">
+                        <h3 class="text-[#0A0A12] text-2xl font-semibold">Второй мозг (Obsidian)</h3>
+                        <p class="text-[#0A0A12] text-base font-normal leading-[1.6] opacity-70">Система управления бизнес-знаниями: разговоры с клиентами, контракты, данные — всё в одном месте с мгновенным поиском.</p>
+                    </div>
+                </div>
+                <div class="flex-1 bg-[#F0F0F5] rounded-2xl p-8 flex flex-col gap-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1D7A74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path><path d="M5 3v4"></path><path d="M19 17v4"></path><path d="M3 5h4"></path><path d="M17 19h4"></path></svg>
+                    <div class="flex flex-col gap-3">
+                        <h3 class="text-[#0A0A12] text-2xl font-semibold">AI-ускорение (Cursor)</h3>
+                        <p class="text-[#0A0A12] text-base font-normal leading-[1.6] opacity-70">AI помощник для работы с кодом, текстами и задачами. Ускорение работы со знаниями в несколько раз.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Для кого эта программа -->
-    <section class="section">
-        <h2 class="section-title">Для кого эта программа</h2>
-        <h3 class="section-subtitle">Только для первых лиц компаний</h3>
-        <ul class="features-list">
-            <li>Владельцы бизнеса</li>
-            <li>Генеральные директора</li>
-            <li>Первые лица, которые имеют авторитет для внедрения изменений</li>
-        </ul>
-        <div class="highlight-box">
-            <h4>Почему только первые лица?</h4>
-            <p>Изменения должны идти сверху вниз. Только первое лицо может внедрить изменения в компании.</p>
+    <!-- Why Section -->
+    <section class="bg-[#F5F5F7] py-[100px] px-20">
+        <div class="max-w-7xl mx-auto flex flex-col gap-[60px]">
+            <div class="flex flex-col gap-4">
+                <span class="text-[#0A0A12] text-xs font-medium tracking-[3px] opacity-50">ПРЕИМУЩЕСТВА</span>
+                <h2 class="text-[#0A0A12] text-5xl font-semibold">Почему автоматизация, а не ассистент?</h2>
+            </div>
+            <div class="flex gap-12">
+                <div class="flex-1 flex flex-col gap-8">
+                    <h3 class="text-[#0A0A12] text-2xl font-semibold">Три ключевых преимущества</h3>
+                    <div class="flex gap-5">
+                        <div class="w-12 h-12 bg-[#1D7A74] rounded-3xl flex items-center justify-center text-white text-xl font-bold">1</div>
+                        <div class="flex-1 flex flex-col gap-2">
+                            <h4 class="text-[#0A0A12] text-lg font-semibold">Контроль и независимость</h4>
+                            <p class="text-[#0A0A12] text-base font-normal leading-[1.6] opacity-70">Вы сами управляете системой, не зависите от людей. Ассистент может заболеть, уйти — ваша автоматизация работает всегда.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-5">
+                        <div class="w-12 h-12 bg-[#1D7A74] rounded-3xl flex items-center justify-center text-white text-xl font-bold">2</div>
+                        <div class="flex-1 flex flex-col gap-2">
+                            <h4 class="text-[#0A0A12] text-lg font-semibold">Масштабируемость</h4>
+                            <p class="text-[#0A0A12] text-base font-normal leading-[1.6] opacity-70">Автоматизация работает 24/7. Одна автоматизация обрабатывает сотни задач одновременно.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-5">
+                        <div class="w-12 h-12 bg-[#1D7A74] rounded-3xl flex items-center justify-center text-white text-xl font-bold">3</div>
+                        <div class="flex-1 flex flex-col gap-2">
+                            <h4 class="text-[#0A0A12] text-lg font-semibold">Навык на всю жизнь</h4>
+                            <p class="text-[#0A0A12] text-base font-normal leading-[1.6] opacity-70">Вы получаете навык создавать автоматизации для любых задач. Ассистент уходит — навык остается.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-[636px] flex flex-col gap-6">
+                    <h3 class="text-[#0A0A12] text-2xl font-semibold">Почему не просто нанять ассистента?</h3>
+                    <p class="text-[#0A0A12] text-lg font-normal opacity-70">Ассистент освободит время завтра, но:</p>
+                    <div class="flex flex-col gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 bg-[#0A0A1230] rounded-xl flex items-center justify-center text-white text-sm font-bold">—</div>
+                            <span class="text-[#0A0A12] text-base font-normal opacity-80">Вы зависите от человека (болезни, отпуска, увольнения)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 bg-[#0A0A1230] rounded-xl flex items-center justify-center text-white text-sm font-bold">—</div>
+                            <span class="text-[#0A0A12] text-base font-normal opacity-80">Нужна постоянная оплата (80-150К в месяц)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 bg-[#0A0A1230] rounded-xl flex items-center justify-center text-white text-sm font-bold">—</div>
+                            <span class="text-[#0A0A12] text-base font-normal opacity-80">Ограниченная масштабируемость</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 bg-[#0A0A1230] rounded-xl flex items-center justify-center text-white text-sm font-bold">—</div>
+                            <span class="text-[#0A0A12] text-base font-normal opacity-80">Нет навыка для самостоятельного развития</span>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 border-4 border-[#7C3AED]">
+                        <p class="text-[#0A0A12] text-lg font-semibold leading-[1.5]">Автоматизация дает контроль,<br>независимость и навык<br>на всю жизнь.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Что вы получите -->
-    <section class="section section-alt">
-        <h2 class="section-title">Что вы получите</h2>
-        <div class="two-columns">
-            <div>
-                <h3 class="section-subtitle">База знаний "ИИ продуктивность"</h3>
-                <p class="section-description" style="margin-bottom: var(--space-md);">После прохождения программы вы получаете доступ к структурированной базе знаний с материалами:</p>
-                <ul class="features-list">
-                    <li><strong>Основы автоматизации</strong> – как работают автоматизации</li>
-                    <li><strong>Методы и подходы</strong> – как находить задачи для автоматизации и проектировать решения</li>
-                    <li><strong>Шаблоны для работы с AI</strong> – готовые промпты для быстрого старта</li>
-                    <li><strong>Справочник</strong> – ответы на частые вопросы и словарь терминов</li>
-                </ul>
+    <!-- How Section -->
+    <section id="program" class="bg-white py-[100px] px-20">
+        <div class="max-w-7xl mx-auto flex flex-col gap-[60px]">
+            <div class="flex flex-col gap-4">
+                <span class="text-[#0A0A12] text-xs font-medium tracking-[3px] opacity-50">ПРОГРАММА</span>
+                <h2 class="text-[#0A0A12] text-5xl font-semibold">Как это работает (1 месяц)</h2>
             </div>
-            <div>
-                <h3 class="section-subtitle">Навыки на всю жизнь</h3>
-                <ul class="features-list">
-                    <li>Вы можете продолжать развиваться самостоятельно</li>
-                    <li>У вас есть все инструменты и навыки для создания автоматизаций</li>
-                    <li>Вы можете обучать свою команду</li>
-                    <li>Готовность к программе "Командная продуктивность" (следующий этап)</li>
-                </ul>
+            <div class="flex gap-6">
+                <div class="flex-1 flex flex-col gap-5">
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 bg-[#1D7A74] rounded-2xl flex items-center justify-center text-white text-sm font-bold">✓</div>
+                        <span class="text-[#0A0A12] text-lg font-normal opacity-80">2 занятия в неделю по 1.5 часа</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 bg-[#1D7A74] rounded-2xl flex items-center justify-center text-white text-sm font-bold">✓</div>
+                        <span class="text-[#0A0A12] text-lg font-normal opacity-80">1 час в день самостоятельной работы</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 bg-[#1D7A74] rounded-2xl flex items-center justify-center text-white text-sm font-bold">✓</div>
+                        <span class="text-[#0A0A12] text-lg font-normal opacity-80">Ежедневное подведение итогов (интенсив)</span>
+                    </div>
+                </div>
+                <div class="flex-1 flex flex-col gap-5">
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 bg-[#1D7A74] rounded-2xl flex items-center justify-center text-white text-sm font-bold">✓</div>
+                        <span class="text-[#0A0A12] text-lg font-normal opacity-80">Чат для общения и вопросов</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 bg-[#1D7A74] rounded-2xl flex items-center justify-center text-white text-sm font-bold">✓</div>
+                        <span class="text-[#0A0A12] text-lg font-normal opacity-80">Ваш темп — ускорить или замедлить когда нужно</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Футер -->
-    <footer class="footer">
-        <div class="footer-content">
-            <h3>От хаоса к системе</h3>
-            <p style="margin-top: var(--space-md); margin-bottom: var(--space-sm);">Освободи время для стратегии. Автоматизируй рутину. Управляй бизнес-знаниями. Получи контроль над процессами.</p>
-            <p style="font-size: 24px; font-weight: 600; margin-bottom: 0;">Месяц интенсивной работы.<br>Инвестируй в себя. Начни сегодня.</p>
+    <!-- Weeks Section -->
+    <section class="bg-[#F5F5F7] py-[100px] px-20">
+        <div class="max-w-7xl mx-auto flex flex-col gap-[60px]">
+            <div class="flex flex-col gap-4">
+                <span class="text-[#0A0A12] text-xs font-medium tracking-[3px] opacity-50">ЭТАПЫ</span>
+                <h2 class="text-[#0A0A12] text-5xl font-semibold">Четыре недели программы</h2>
+            </div>
+            <div class="flex gap-6">
+                <div class="flex-1 bg-white rounded-2xl p-8 border-4 border-[#1D7A74] flex flex-col gap-4">
+                    <h3 class="text-[#0A0A12] text-2xl font-semibold">Неделя 1</h3>
+                    <span class="text-[#1D7A74] text-base font-medium">Знакомство</span>
+                    <p class="text-[#0A0A12] text-sm font-normal leading-[1.5] opacity-70">Аудит текущего состояния и изучение основ автоматизации</p>
+                </div>
+                <div class="flex-1 bg-white rounded-2xl p-8 border-4 border-[#2563EB] flex flex-col gap-4">
+                    <h3 class="text-[#0A0A12] text-2xl font-semibold">Неделя 2</h3>
+                    <span class="text-[#2563EB] text-base font-medium">Автоматизация</span>
+                    <p class="text-[#0A0A12] text-sm font-normal leading-[1.5] opacity-70">Создаём первую автоматизацию для самой болезненной рутинной операции</p>
+                </div>
+                <div class="flex-1 bg-white rounded-2xl p-8 border-4 border-[#14B8A6] flex flex-col gap-4">
+                    <h3 class="text-[#0A0A12] text-2xl font-semibold">Неделя 3</h3>
+                    <span class="text-[#14B8A6] text-base font-medium">Второй мозг</span>
+                    <p class="text-[#0A0A12] text-sm font-normal leading-[1.5] opacity-70">Настройка системы управления бизнес-знаниями</p>
+                </div>
+                <div class="flex-1 bg-white rounded-2xl p-8 border-4 border-[#7C3AED] flex flex-col gap-4">
+                    <h3 class="text-[#0A0A12] text-2xl font-semibold">Неделя 4</h3>
+                    <span class="text-[#7C3AED] text-base font-medium">AI-ускорение</span>
+                    <p class="text-[#0A0A12] text-sm font-normal leading-[1.5] opacity-70">Настройка AI помощника для работы со знаниями и задачами</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="bg-white py-[100px] px-20">
+        <div class="max-w-7xl mx-auto flex flex-col gap-[60px]">
+            <div class="flex flex-col gap-4">
+                <span class="text-[#0A0A12] text-xs font-medium tracking-[3px] opacity-50">СТОИМОСТЬ</span>
+                <h2 class="text-[#0A0A12] text-5xl font-semibold">Два формата программы</h2>
+            </div>
+            <div class="flex gap-12">
+                <div class="flex-1 bg-white rounded-3xl p-12 border-2 border-[#0A0A1215] flex flex-col gap-6">
+                    <h3 class="text-[#0A0A12] text-[28px] font-semibold">Интенсив</h3>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-[#1D7A74] text-5xl font-extrabold">250 тыс. ₽</span>
+                        <span class="text-[#0A0A12] text-lg font-normal opacity-50">/ месяц</span>
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#1D7A74] text-base font-bold">✓</span>
+                            <span class="text-[#0A0A12] text-base font-normal opacity-80">Ежедневное подведение итогов (5+ раз в неделю)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#1D7A74] text-base font-bold">✓</span>
+                            <span class="text-[#0A0A12] text-base font-normal opacity-80">Максимальная поддержка и контроль</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#1D7A74] text-base font-bold">✓</span>
+                            <span class="text-[#0A0A12] text-base font-normal opacity-80">Быстрый прогресс и результаты</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#1D7A74] text-base font-bold">✓</span>
+                            <span class="text-[#0A0A12] text-base font-semibold">Результат в 10 раз быстрее</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 bg-white rounded-3xl p-12 border-2 border-[#0A0A1215] flex flex-col gap-6">
+                    <h3 class="text-[#0A0A12] text-[28px] font-semibold">Лайт</h3>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-[#1D7A74] text-5xl font-extrabold">150 тыс. ₽</span>
+                        <span class="text-[#0A0A12] text-lg font-normal opacity-50">/ месяц</span>
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#1D7A74] text-base font-bold">✓</span>
+                            <span class="text-[#0A0A12] text-base font-normal opacity-80">Еженедельный контроль</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#1D7A74] text-base font-bold">✓</span>
+                            <span class="text-[#0A0A12] text-base font-normal opacity-80">Больше самостоятельности</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#1D7A74] text-base font-bold">✓</span>
+                            <span class="text-[#0A0A12] text-base font-normal opacity-80">Подходит для тех, кто уверен в своей дисциплине</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Who Section -->
+    <section class="bg-[#F5F5F7] py-[100px] px-20">
+        <div class="max-w-7xl mx-auto flex flex-col gap-12">
+            <div class="flex flex-col gap-4">
+                <span class="text-[#0A0A12] text-xs font-medium tracking-[3px] opacity-50">АУДИТОРИЯ</span>
+                <h2 class="text-[#0A0A12] text-5xl font-semibold">Для кого эта программа</h2>
+                <p class="text-[#1D7A74] text-2xl font-semibold">Только для первых лиц компаний</p>
+            </div>
+            <div class="flex gap-12">
+                <div class="flex-1 flex flex-col gap-5">
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 bg-[#1D7A74] rounded-2xl flex items-center justify-center text-white text-sm font-bold">✓</div>
+                        <span class="text-[#0A0A12] text-lg font-normal opacity-80">Владельцы бизнеса</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 bg-[#1D7A74] rounded-2xl flex items-center justify-center text-white text-sm font-bold">✓</div>
+                        <span class="text-[#0A0A12] text-lg font-normal opacity-80">Генеральные директора</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 bg-[#1D7A74] rounded-2xl flex items-center justify-center text-white text-sm font-bold">✓</div>
+                        <span class="text-[#0A0A12] text-lg font-normal opacity-80">Первые лица с авторитетом для внедрения изменений</span>
+                    </div>
+                </div>
+                <div class="flex-1 bg-white rounded-2xl p-8 border-2 border-[#1D7A7430] flex flex-col gap-4">
+                    <h3 class="text-[#1D7A74] text-[22px] font-semibold">Почему только первые лица?</h3>
+                    <p class="text-[#0A0A12] text-lg font-normal leading-[1.6] opacity-70">Изменения должны идти сверху вниз. Только первое лицо может внедрить изменения в компании.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What You Get Section -->
+    <section class="bg-white py-[100px] px-20 relative">
+        <div class="absolute inset-0 opacity-[0.07] bg-contain bg-center bg-no-repeat pointer-events-none" style="background-image: url('./images/logo-big.jpg');"></div>
+        <div class="relative max-w-7xl mx-auto flex flex-col gap-[60px]">
+            <div class="flex flex-col gap-4">
+                <span class="text-[#0A0A12] text-xs font-medium tracking-[3px] opacity-50">РЕЗУЛЬТАТ</span>
+                <h2 class="text-[#0A0A12] text-5xl font-semibold">Что вы получите</h2>
+            </div>
+            <div class="flex gap-12">
+                <div class="flex-1 flex flex-col gap-6">
+                    <h3 class="text-[#0A0A12] text-2xl font-semibold">База знаний "ИИ продуктивность"</h3>
+                    <p class="text-[#0A0A12] text-lg font-normal leading-[1.6] opacity-70">После прохождения программы вы получаете доступ к структурированной базе знаний:</p>
+                    <div class="flex flex-col gap-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#1D7A74] text-base font-bold">✓</span>
+                            <span class="text-[#0A0A12] text-base font-normal opacity-80">Основы автоматизации — как работают автоматизации</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#1D7A74] text-base font-bold">✓</span>
+                            <span class="text-[#0A0A12] text-base font-normal opacity-80">Методы и подходы — как проектировать решения</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#1D7A74] text-base font-bold">✓</span>
+                            <span class="text-[#0A0A12] text-base font-normal opacity-80">Шаблоны для работы с AI — готовые промпты</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#1D7A74] text-base font-bold">✓</span>
+                            <span class="text-[#0A0A12] text-base font-normal opacity-80">Справочник — ответы на частые вопросы</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 flex flex-col gap-6">
+                    <h3 class="text-[#0A0A12] text-2xl font-semibold">Навыки на всю жизнь</h3>
+                    <div class="flex flex-col gap-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#1D7A74] text-base font-bold">✓</span>
+                            <span class="text-[#0A0A12] text-base font-normal opacity-80">Вы можете продолжать развиваться самостоятельно</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#1D7A74] text-base font-bold">✓</span>
+                            <span class="text-[#0A0A12] text-base font-normal opacity-80">У вас есть все инструменты для создания автоматизаций</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#1D7A74] text-base font-bold">✓</span>
+                            <span class="text-[#0A0A12] text-base font-normal opacity-80">Вы можете обучать свою команду</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#1D7A74] text-base font-bold">✓</span>
+                            <span class="text-[#0A0A12] text-base font-normal opacity-80">Готовность к программе "Командная продуктивность"</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0A0A12] h-[280px] flex items-center justify-between px-20">
+        <div class="flex flex-col gap-4">
+            <h4 class="text-white text-2xl font-semibold">ИИ Продуктивность</h4>
+            <p class="text-white text-lg font-normal opacity-70">От хаоса к системе</p>
+            <p class="text-white text-base font-normal leading-[1.6] opacity-50">Месяц интенсивной работы.<br>Инвестируй в себя. Начни сегодня.</p>
+        </div>
+        <div class="flex flex-col gap-4">
+            <span class="text-white text-sm font-normal opacity-50">Контакты</span>
+            <a href="mailto:vlad@datamaster.pro" class="text-white text-base font-normal hover:opacity-70 transition">Почта</a>
+            <a href="https://t.me/vladkamensky" class="text-white text-base font-normal hover:opacity-70 transition">Телеграм</a>
+        </div>
+        <div class="flex flex-col gap-4">
+            <span class="text-white text-sm font-normal opacity-50">Соцсети</span>
+            <a href="https://t.me/datamasterru" class="text-white text-base font-normal hover:opacity-70 transition">Телеграм Канал</a>
+            <a href="https://youtube.com/@vladkamensky" class="text-white text-base font-normal hover:opacity-70 transition">YouTube</a>
+            <a href="https://habr.com/ru/users/vladkamensky/" class="text-white text-base font-normal hover:opacity-70 transition">Хабр</a>
+            <a href="https://vc.ru/u/vladkamensky" class="text-white text-base font-normal hover:opacity-70 transition">VC.ru</a>
+        </div>
+        <div class="flex items-center gap-[10px]">
+            <span class="text-white text-xl font-bold">мастер данных</span>
+            <div class="w-10 h-10 bg-cover bg-center" style="background-image: url('./images/master-logo-dark.jpg');"></div>
         </div>
     </footer>
 
-    <!-- Мобильное меню -->
-    <div class="mobile-menu" id="mobileMenu">
-        <ul>
-            <li><a href="#about">О программе</a></li>
-            <li><a href="#tools">Инструменты</a></li>
-            <li><a href="#program">Программа</a></li>
-            <li><a href="#pricing">Стоимость</a></li>
-        </ul>
-    </div>
-
-    <!-- Кнопка наверх -->
-    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Наверх">↑</button>
-
     <script>
-        // Навигация при скролле
-        const navbar = document.getElementById('navbar');
-        const scrollTop = document.getElementById('scrollTop');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-                scrollTop.classList.add('visible');
-            } else {
-                navbar.classList.remove('scrolled');
-                scrollTop.classList.remove('visible');
-            }
-        });
-
-        // Мобильное меню
-        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        mobileMenuToggle.addEventListener('click', () => {
-            mobileMenuToggle.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-        });
-
-        // Закрытие мобильного меню при клике на ссылку
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenuToggle.classList.remove('active');
-                mobileMenu.classList.remove('active');
-            });
-        });
-
-        // Плавная прокрутка для ссылок
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    const offset = 80;
-                    const targetPosition = target.offsetTop - offset;
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
                 }
             });
         });
-
-        // Анимации при скролле
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // Применяем анимации к элементам
-        document.querySelectorAll('.card').forEach((el, index) => {
-            el.classList.add('fade-in');
-            el.style.transitionDelay = `${index * 0.1}s`;
-            observer.observe(el);
-        });
-
-        document.querySelectorAll('.highlight-box').forEach(el => {
-            el.classList.add('fade-in');
-            observer.observe(el);
-        });
-
-        document.querySelectorAll('.week-card').forEach((el, index) => {
-            el.classList.add('scale-in');
-            el.style.transitionDelay = `${index * 0.1}s`;
-            observer.observe(el);
-        });
-
-        document.querySelectorAll('.price-card').forEach((el, index) => {
-            el.classList.add('scale-in');
-            el.style.transitionDelay = `${index * 0.15}s`;
-            observer.observe(el);
-        });
-
-        document.querySelectorAll('.two-columns > div').forEach((el, index) => {
-            if (index % 2 === 0) {
-                el.classList.add('slide-in-left');
-            } else {
-                el.classList.add('slide-in-right');
-            }
-            observer.observe(el);
-        });
-
-        // Анимация для hero секции
-        const heroContent = document.querySelector('.hero-content');
-        if (heroContent) {
-            heroContent.classList.add('fade-in');
-            heroContent.classList.add('visible');
-        }
     </script>
 </body>
 </html>
-
-
-
